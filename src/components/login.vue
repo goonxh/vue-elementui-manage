@@ -1,13 +1,12 @@
 <template>
-    <div class="home-page">
-        <p>hello vue</p>
-        <p>hello vue</p>
+    <div class="login-page">
+        <p>hello login</p>
     </div>
 </template>
 
 <script>
     export default {
-        name: "home",
+        name: "login",
         data() {
             return {
 

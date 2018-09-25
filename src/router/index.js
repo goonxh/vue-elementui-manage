@@ -1,16 +1,13 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
-const home = {
-    template: '<div>hello world</div>'
-}
-const gg = {
-    template: '<div>hello gg</div>'
-}
+import home from '@/components/home';
+import login from '@/components/login';
+
 Vue.use(Router);
 
 export default new Router({
-    mode: 'history',
+    //mode: 'history',
     routes: [
         {
             path: '/',
@@ -18,9 +15,9 @@ export default new Router({
             component: home
         },
         {
-            path: '/gg',
-            name: 'gg',
-            component: gg
-        }
+            path: '/login',
+            name: 'login',
+            component: login
+        },
     ]
 })
