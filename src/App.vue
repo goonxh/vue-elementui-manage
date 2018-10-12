@@ -10,6 +10,6 @@
     }
 </script>
 
-<style scoped>
-
+<style lang="scss">
+    @import "style/common.scss";
 </style>

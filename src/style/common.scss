@@ -1,0 +1,259 @@
+@import "variables";
+
+body, div, span, header, footer, nav, section, aside, article, ul, dl, dt, dd, li, a, p, h1, h2, h3, h4, h5, h6, i, b, textarea, button, input, select, figure, figcaption {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  font-style: normal;
+  text-decoration: none;
+  border: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-font-smoothing: antialiased;
+  &:focus {
+    outline: none;
+  }
+}
+
+/*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  background-color: #F5F5F5;
+}
+
+/*定义滚动条轨道 内阴影+圆角*/
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 1px rgba(0, 0, 0, 0);
+  border-radius: 10px;
+  background-color: #F5F5F5;
+}
+
+/*定义滑块 内阴影+圆角*/
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+  background-color: #555;
+}
+
+input[type="button"], input[type="submit"], input[type="search"], input[type="reset"] {
+  -webkit-appearance: none;
+}
+
+textarea {
+  -webkit-appearance: none;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  // background-color: #F5F5F5;
+}
+
+.fill-contain {
+  height: 100%;
+  width: 100%;
+}
+
+.clear:after{
+  content: '';
+  display: block;
+  clear: both;
+}
+
+.clear{
+  zoom:1;
+}
+
+.back_img{
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.margin{
+  margin: 0 auto;
+}
+
+.left{
+  float: left;
+}
+
+.right{
+  float: right;
+}
+
+.hide{
+  display: none;
+}
+
+.show{
+  display: block;
+}
+
+.ellipsis{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.flex {
+  display: flex;
+  display: -ms-flexbox;
+  display: -webkit-flex
+}
+
+.column {
+  flex-direction: column;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column
+}
+
+.row {
+  flex-direction: row;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row
+}
+
+.wrap {
+  flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap
+}
+
+.nowrap {
+  flex-wrap: nowrap;
+  -webkit-flex-wrap: nowrap;
+  -ms-flex-wrap: nowrap
+}
+
+.justify-content-center {
+  justify-content: center;
+  -webkit-justify-content: center
+}
+
+.justify-content-between {
+  justify-content: space-between;
+  -webkit-justify-content: space-between
+}
+
+.justify-content-around {
+  justify-content: space-around;
+  -webkit-justify-content: space-around
+}
+
+.justify-content-start {
+  justify-content: flex-start;
+  -webkit-justify-content: flex-start
+}
+
+.justify-content-end {
+  justify-content: flex-end;
+  -webkit-justify-content: flex-end
+}
+
+.align-items-center {
+  align-items: center;
+  -webkit-align-items: center
+}
+
+.align-items-start {
+  align-items: flex-start;
+  -webkit-align-items: flex-start
+}
+
+.align-items-end {
+  align-items: flex-end;
+  -webkit-align-items: flex-end
+}
+
+.align-items-stretch {
+  align-items: stretch;
+  -webkit-align-items: stretch
+}
+
+.align-items-baseline {
+  align-items: baseline;
+  -webkit-align-items: baseline
+}
+
+.align-self-center {
+  align-self: center;
+  -webkit-align-self: center
+}
+
+.align-self-start {
+  align-self: flex-start;
+  -webkit-align-self: flex-start
+}
+
+.align-self-end {
+  align-self: flex-end;
+  -webkit-align-self: flex-end
+}
+
+.align-self-stretch {
+  align-self: stretch;
+  -webkit-align-self: stretch
+}
+
+.align-self-baseline {
+  align-self: baseline;
+  -webkit-align-self: baseline
+}
+
+.flex-1 {
+  flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1
+}
+
+.flex-2 {
+  flex: 2;
+  -webkit-flex: 2;
+  -ms-flex: 2
+}
+
+.flex-3 {
+  flex: 3;
+  -webkit-flex: 3;
+  -ms-flex: 3
+}
+
+.flex-4 {
+  flex: 4;
+  -webkit-flex: 4;
+  -ms-flex: 4
+}
+
+.flex-5 {
+  flex: 5;
+  -webkit-flex: 5;
+  -ms-flex: 5
+}
+
+.relative {
+  position: relative
+}
+
+.absolute {
+  position: absolute
+}
+
+.fixed {
+  position: fixed
+}
+
+.text-center {
+  text-align: center
+}
+
+.text-left {
+  text-align: left
+}
+
+.text-right {
+  text-align: right
+}
+
+.pointer {
+  cursor: pointer;
+}

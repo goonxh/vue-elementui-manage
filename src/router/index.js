@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 Vue.use(Router);
 
-const home = r => require.ensure([], ()=> r(require('@/components/sideNav')), 'home');
+const manage = r => require.ensure([], ()=> r(require('@/page/manage/manage')), 'manage');
 const login = r => require.ensure([], () => r(require('@/page/base/login')), 'login');
 const notFound = r => require.ensure([], () => r(require('@/page/base/404')), 'notFound');
 
@@ -23,6 +23,11 @@ const router = new Router({
             name: 'login',
             component: login
         },
+        {
+            path: '/manage',
+            name: 'manage',
+            component: manage
+        }
     ]
 })
 
