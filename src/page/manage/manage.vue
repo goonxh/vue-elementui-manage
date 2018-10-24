@@ -3,7 +3,7 @@
         <el-header>
             <head-top @clickMenuIcon="clickMenuIcon"></head-top>
         </el-header>
-        <el-container>
+        <el-container class="fill-contain">
             <side-nav :is-collapse = 'isCollapse'></side-nav>
             <el-main>
                 <router-view></router-view>

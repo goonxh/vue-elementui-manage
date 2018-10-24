@@ -5,6 +5,7 @@ Vue.use(Router);
 const manage = r => require.ensure([], ()=> r(require('@/page/manage/manage')), 'manage');
 const login = r => require.ensure([], () => r(require('@/page/base/login')), 'login');
 const notFound = r => require.ensure([], () => r(require('@/page/base/404')), 'notFound');
+const home = r => require.ensure([], () => r(require('@/page/manage/home/home')), 'home');
 
 const router = new Router({
     mode: 'history',
@@ -26,8 +27,16 @@ const router = new Router({
         {
             path: '/manage',
             name: 'manage',
-            component: manage
-        }
+            component: manage,
+            redirect: '/home',
+            children: [
+                {
+                    path: '/home',
+                    name: 'home',
+                    component: home,
+                }
+            ]
+        },
     ]
 })
 
