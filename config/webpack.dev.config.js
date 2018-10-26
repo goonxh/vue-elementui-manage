@@ -35,7 +35,11 @@ module.exports = function() {
                 ignored: /node_modeles/,
             },
             proxy: {
-
+                /*'/api' :{
+                    target: 'http://localhost:8989',
+                    secure: false,
+                    changeOrigin: true,
+                }*/
             },
         }
     })

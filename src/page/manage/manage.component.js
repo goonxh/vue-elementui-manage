@@ -11,10 +11,20 @@ export default {
             isCollapse: false,
         }
     },
-
+    created() {
+      this.user();
+    },
     methods: {
         clickMenuIcon(val) {
             this.isCollapse = val;
-        }
+        },
+        user() {
+            this.axios.post('http://localhost:8989/userInfo',{id:window.sessionStorage.getItem('userId')})
+                .then((res) => {
+                    this.$store.commit('setUser', res.data);
+                }).catch((err) =>{
+                    console.log(err);
+            })
+        },
     }
 }

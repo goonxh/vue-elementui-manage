@@ -33,7 +33,20 @@
             login(formName) {
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-                        this.$router.replace('manage');
+                        this.axios.post('http://localhost:8989/login',this.loginForm).then((res) =>{
+                            if(res.data.success === 1) {
+                                this.$router.replace('manage');
+                                this.$store.commit('setUser', res.data.user);
+                                window.sessionStorage.setItem('userId',res.data.user._id);
+                                window.sessionStorage.setItem('userName',res.data.user.name);
+                            } else {
+                                this.$message.error(res.data);
+                            }
+                        }).catch((err)=>{
+
+                        }).finally(()=>{
+
+                        })
                     } else {
                         return false;
                     }
