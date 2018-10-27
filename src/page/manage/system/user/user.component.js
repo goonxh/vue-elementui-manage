@@ -1,3 +1,4 @@
+import {baseUrl} from "../../../../config/utils";
 
 export default {
     data() {
@@ -38,7 +39,7 @@ export default {
         confirmBtn(formName) {
              this.$refs[formName].validate((valid) => {
                  if (valid) {
-                     this.axios.post('http://localhost:8989/register', this.newUserForm).then((res)=>{
+                     this.axios.post(`${baseUrl}/register`, this.newUserForm).then((res)=>{
                          console.log(res);
                      }).catch((err) => {
                          console.log(err);

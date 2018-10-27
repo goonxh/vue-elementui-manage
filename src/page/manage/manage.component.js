@@ -1,5 +1,6 @@
 import headTop from '@/components/headTop';
 import sideNav from '@/components/sideNav';
+import {baseUrl} from "../../config/utils";
 
 export default {
     components: {
@@ -19,7 +20,7 @@ export default {
             this.isCollapse = val;
         },
         user() {
-            this.axios.post('http://localhost:8989/userInfo',{id:window.sessionStorage.getItem('userId')})
+            this.axios.post(`${baseUrl}/userInfo`,{id: window.sessionStorage.getItem('userId')})
                 .then((res) => {
                     this.$store.commit('setUser', res.data);
                 }).catch((err) =>{

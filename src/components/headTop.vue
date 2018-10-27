@@ -43,6 +43,8 @@
 
 <script>
     import {mapState} from 'vuex'
+    import {baseUrl} from "../config/utils";
+
     export default {
         data() {
             return {
@@ -84,7 +86,7 @@
                             username:this.user.username,
                             password:this.passForm.password,
                         };
-                        this.axios.post('http://localhost:8989/login',params).then((res)=>{
+                        this.axios.post(`${baseUrl}/login`,params).then((res)=>{
                             if(res.data.success === 1) {
                                 this.lockScreenDialogVisible = false;
                                 window.sessionStorage.setItem('lockScreenDialogVisible','false');

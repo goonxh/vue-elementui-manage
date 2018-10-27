@@ -18,8 +18,8 @@
 </template>
 
 <script>
+    import {baseUrl} from "../../config/utils";
     export default {
-        name: "login",
         data() {
             return {
                 loginForm: {},
@@ -33,7 +33,7 @@
             login(formName) {
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-                        this.axios.post('http://localhost:8989/login',this.loginForm).then((res) =>{
+                        this.axios.post(`${baseUrl}/login`,this.loginForm).then((res) =>{
                             if(res.data.success === 1) {
                                 this.$router.replace('manage');
                                 this.$store.commit('setUser', res.data.user);
