@@ -5,11 +5,15 @@ Vue.use(Vuex);
 
 const state = {
     user: {},
+    isLogin: false,
 }
 
 const mutations = {
     setUser(state, user) {
         state.user = user;
+    },
+    isLogin(state, status) {
+        state.isLogin = status;
     },
 }
 

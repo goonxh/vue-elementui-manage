@@ -29,16 +29,25 @@
                 },
             }
         },
+        created() {
+            this.$notify({
+                title: '提示',
+                message: '用户名、密码见调试模式。',
+                duration: 3000
+            });
+            console.log({username:'admin',password:'123456'});
+        },
         methods: {
             login(formName) {
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
                         this.axios.post(`${baseUrl}/login`,this.loginForm).then((res) =>{
                             if(res.data.success === 1) {
-                                this.$router.replace('manage');
                                 this.$store.commit('setUser', res.data.user);
+                                window.sessionStorage.setItem('isLogin','true');
                                 window.sessionStorage.setItem('userId',res.data.user._id);
                                 window.sessionStorage.setItem('userName',res.data.user.name);
+                                this.$router.replace('manage');
                             } else {
                                 this.$message.error(res.data);
                             }

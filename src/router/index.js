@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
+import store from '../store/';
 Vue.use(Router);
 
 const manage = r => require.ensure([], ()=> r(require('@/page/manage/manage')), 'manage');
@@ -55,7 +56,13 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
-    next();
+    if(window.sessionStorage.getItem('isLogin') === 'true') {
+        next();
+    }else if(to.path === '/login'){
+        next();
+    }else{
+        next('/login');
+    }
 })
 
 export default router;

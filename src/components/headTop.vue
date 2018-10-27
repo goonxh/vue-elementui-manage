@@ -74,6 +74,7 @@
             },
             logout() {
                 this.$router.replace('/login');
+                window.sessionStorage.setItem('isLogin', 'false');
             },
             lockScreen() {
                 this.lockScreenDialogVisible = true;
