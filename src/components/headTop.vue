@@ -75,6 +75,7 @@
             logout() {
                 this.$router.replace('/login');
                 window.sessionStorage.setItem('isLogin', 'false');
+                window.sessionStorage.removeItem('token');
             },
             lockScreen() {
                 this.lockScreenDialogVisible = true;

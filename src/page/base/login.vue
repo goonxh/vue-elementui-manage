@@ -47,6 +47,7 @@
                                 window.sessionStorage.setItem('isLogin','true');
                                 window.sessionStorage.setItem('userId',res.data.user._id);
                                 window.sessionStorage.setItem('userName',res.data.user.name);
+                                window.sessionStorage.setItem('token',`Bearer ${res.data.token}`);
                                 this.$router.replace('manage');
                             } else {
                                 this.$message.error(res.data);
