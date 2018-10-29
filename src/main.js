@@ -36,6 +36,7 @@ axios.interceptors.response.use(function (response) {
         })
         setTimeout(() =>{
             router.replace('/login');
+            window.sessionStorage.removeItem('token');
         },1000)
     }
     return Promise.reject(error);

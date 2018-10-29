@@ -3,7 +3,7 @@ let baseUrl = '';
 if(process.env.NODE_ENV === 'development') {
     baseUrl = '/api';
 } else {
-    baseUrl = 'https://api.xiehao.xin';
+    baseUrl =  window.location.origin;
 }
 
 export {

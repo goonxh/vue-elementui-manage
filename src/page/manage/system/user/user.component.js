@@ -40,7 +40,7 @@ export default {
              this.$refs[formName].validate((valid) => {
                  if (valid) {
                      this.axios.post(`${baseUrl}/register`, this.newUserForm).then((res)=>{
-                         console.log(res);
+                         this.$message.success('用户添加成功');
                      }).catch((err) => {
                          console.log(err);
                      }).finally(()=>{
