@@ -15,7 +15,10 @@ export default {
         }
         return {
             newUserDialog: false,
-            newUserForm: {},
+            dialogStatus: 'add',
+            newUserForm: {
+                role:'',
+            },
             tableData: [],
             loading: false,
             tablePageSize: 10,
@@ -26,6 +29,9 @@ export default {
                 ],
                 name: [
                     {required: true, message: '请输入姓名', trigger: 'blur'},
+                ],
+                oldPassword: [
+                    {required: true, message: '请输入原密码', trigger: 'blur'},
                 ],
                 password: [
                     {required: true, message: '请输入密码', trigger: 'blur'},
@@ -42,18 +48,43 @@ export default {
     methods: {
         resetForm() {
             this.$refs['userForm'].resetFields();
+            this.newUserForm = {role:'',};
+            this.dialogStatus = 'add';
         },
         confirmBtn(formName) {
              this.$refs[formName].validate((valid) => {
                  if (valid) {
-                     this.axios.post(`${baseUrl}/register`, this.newUserForm).then((res)=>{
-                         this.$message.success('用户添加成功');
-                     }).catch((err) => {
-                         console.log(err);
-                     }).finally(()=>{
-                         this.newUserDialog = false;
-                         this.resetForm();
-                     })
+                     if(this.dialogStatus === 'add'){
+                         this.axios.post(`${baseUrl}/register`, this.newUserForm).then((res)=>{
+                             if(res.data === 1){
+                                 this.$message.success('用户添加成功');
+                                 this.newUserDialog = false;
+                                 this.resetForm();
+                                 this.getUserList();
+                             }else{
+                                 this.$message.error(res.data);
+                             }
+                         }).catch((err) => {
+                             console.log(err);
+                         }).finally(()=>{
+
+                         })
+                     }else{
+                         this.axios.patch(`${baseUrl}/user`, this.newUserForm).then((res)=>{
+                             if(res.data === 1){
+                                 this.$message.success('用户信息修改成功');
+                                 this.newUserDialog = false;
+                                 this.resetForm();
+                                 this.getUserList();
+                             }else{
+                                 this.$message.error(res.data);
+                             }
+                         }).catch((err) => {
+                             console.log(err);
+                         }).finally(()=>{
+
+                         })
+                     }
                  } else {
                      console.log('error submit!!');
                      return false;
@@ -94,8 +125,14 @@ export default {
             this.tablePageSize = val;
             this.getUserList({page:1, page_size:this.tablePageSize});
         },
-        editUser(id) {
-            console.log(id)
+        editUser(row) {
+            this.dialogStatus = 'edit';
+            this.newUserDialog = true;
+            this.newUserForm.name = row.name;
+            this.newUserForm.username = row.username;
+            this.newUserForm.role = row.role;
+            this.newUserForm.email = row.email;
+            this.newUserForm.id = row._id;
         },
         deleteUser(id,name) {
             this.$confirm(`确定要删除用户 ${name} 吗?`, '提示', {

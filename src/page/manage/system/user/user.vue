@@ -1,5 +1,5 @@
 <template>
-    <div class="fill-contain">
+    <div class="fill-contain page-container">
         <div>
             <el-button size="small" type="primary" @click="newUserDialog = true">新增用户</el-button>
         </div>
@@ -15,12 +15,6 @@
                     type="selection"
                     align="center">
             </el-table-column>
-            <!--<el-table-column
-                    prop="_id"
-                    label="id"
-                    align="center"
-                    fixed>
-            </el-table-column>-->
             <el-table-column
                     prop="username"
                     label="用户名"
@@ -46,7 +40,7 @@
             <el-table-column label="操作" align="center" fixed="right">
                 <template slot-scope="scope">
                     <div class="flex justify-content-center">
-                        <el-button type="primary" @click="editUser(scope.row._id)" size="mini"> 修改</el-button>
+                        <el-button type="primary" @click="editUser(scope.row)" size="mini"> 修改</el-button>
                         <el-button type="danger" @click="deleteUser(scope.row._id, scope.row.name)" size="mini"> 删除</el-button>
                     </div>
                 </template>
@@ -62,15 +56,18 @@
                        :current-page="pagination.currentPage"
                        :total="pagination.total">
         </el-pagination>
-        <el-dialog title="新增用户" :visible.sync="newUserDialog" center width="400px" @close="closeUserForm">
+        <el-dialog :title="dialogStatus === 'add'?'新增用户':'编辑用户'" :visible.sync="newUserDialog" center width="400px" @close="closeUserForm">
             <el-form :model="newUserForm" label-width="80px" :rules="newUserFormRules" ref="userForm">
                 <el-form-item label="用户名" prop="username">
-                    <el-input v-model="newUserForm.username" size="small" clearable placeholder="用于登录"></el-input>
+                    <el-input v-model="newUserForm.username" size="small" clearable placeholder="用于登录" :disabled="dialogStatus === 'edit'?true:false"></el-input>
                 </el-form-item>
                 <el-form-item label="姓名" prop="name">
-                    <el-input v-model="newUserForm.name" size="small" clearable placeholder="姓名"></el-input>
+                    <el-input v-model="newUserForm.name" size="small" clearable placeholder="姓名" :disabled="dialogStatus === 'edit'?true:false"></el-input>
                 </el-form-item>
-                <el-form-item label="密码" prop="password">
+                <el-form-item label="原密码" prop="oldPassword" v-if="dialogStatus === 'edit'">
+                    <el-input v-model="newUserForm.oldPassword" size="small" clearable type="password" placeholder="密码"></el-input>
+                </el-form-item>
+                <el-form-item :label="dialogStatus === 'add'?'密码':'新密码'" prop="password">
                     <el-input v-model="newUserForm.password" size="small" clearable type="password" placeholder="密码"></el-input>
                 </el-form-item>
                 <el-form-item label="重复密码" prop="passwordAgain">
@@ -96,6 +93,9 @@
 
 <script src="./user.component.js"></script>
 <style scoped lang="scss">
+    .el-table{
+        margin-top: 15px;
+    }
     .el-form-item {
         margin-bottom: 15px;
     }

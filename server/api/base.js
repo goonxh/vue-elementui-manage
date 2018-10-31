@@ -42,11 +42,50 @@ app.post('/register',(req,res) => {
         role: req.body.role?req.body.role:null,
         email: req.body.email?req.body.email:null,
     })
-    newUser.save((err,data) =>{
-        if(err) {
-            res.send(err);
-        }else{
-            res.send('1');
+    models.user.findOne({username: req.body.username}, (error, user) =>{
+        if(error) throw error;
+        if(user) {
+            return res.send('用户名已存在');
+        }else {
+            newUser.save((err,data) =>{
+                if(err) {
+                    return res.send(err);
+                }else{
+                    return res.send('1');
+                }
+            })
+        }
+    })
+
+})
+/**
+ * 修改密码等用户个人信息
+ */
+app.patch('/user', (req,res)=>{
+    let id = req.body.id;
+    let oldPassword = req.body.oldPassword;
+    models.user.findOne({_id: id}, (error, user) =>{
+        if(error) throw error;
+        if(!user) {
+            return res.send('用户名不存在');
+        }else {
+            user.comparePassword(oldPassword, (err, isMatch)=>{
+                if(err) res.send(err);
+                if(isMatch) {
+                    models.user.where({ _id: id })
+                        .setOptions({ multi: true })
+                        .update({password: req.body.password,
+                        role: req.body.role?req.body.role:null,
+                        email: req.body.email?req.body.email:null},
+                        (error,writeOpResult) => {
+                        if(error) return console.log(error);
+                        console.log(writeOpResult);
+                        return res.send('1');
+                    })
+                } else {
+                    return res.send('密码错误');
+                }
+            })
         }
     })
 })
