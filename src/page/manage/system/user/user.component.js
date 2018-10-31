@@ -16,6 +16,10 @@ export default {
         return {
             newUserDialog: false,
             newUserForm: {},
+            tableData: [],
+            loading: false,
+            tablePageSize: 10,
+            pagination: {},
             newUserFormRules: {
                 username: [
                     {required: true, message: '请输入用户名', trigger: 'blur'},
@@ -31,6 +35,9 @@ export default {
                 ]
             },
         }
+    },
+    created() {
+      this.getUserList();
     },
     methods: {
         resetForm() {
@@ -59,6 +66,53 @@ export default {
         },
         closeUserForm() {
             this.resetForm();
+        },
+        getUserList({page = 1,pageSize = this.tablePageSize} = {
+            page: 1,
+            pageSize: this.tablePageSize
+        }) {
+            this.loading = true;
+            this.axios.get(`${baseUrl}/user`,{params: {page:page,pageSize:pageSize}}).then((res) => {
+                this.tableData = res.data.data;
+                this.pagination = res.data.pagination;
+            }).catch((err)=>{
+                this.$message.error(err)
+            }).finally(()=>{
+                this.loading = false;
+            })
+        },
+        rowClick() {
+
+        },
+        handleSelectionChange() {
+
+        },
+        handleCurrentChange(val) {
+            this.getUserList({page:val, page_size:this.tablePageSize});
+        },
+        handleSizeChange(val) {
+            this.tablePageSize = val;
+            this.getUserList({page:1, page_size:this.tablePageSize});
+        },
+        editUser(id) {
+            console.log(id)
+        },
+        deleteUser(id,name) {
+            this.$confirm(`确定要删除用户 ${name} 吗?`, '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+            }).then(() => {
+                this.axios.delete(`${baseUrl}/user/${id}`).then((res) => {
+                    this.$message.success('用户删除成功');
+                    this.getUserList();
+                })
+            }).catch(() => {
+                this.$message({
+                    type: 'info',
+                    message: '已取消操作'
+                });
+            });
         },
     }
 }

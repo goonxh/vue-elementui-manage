@@ -3,6 +3,65 @@
         <div>
             <el-button size="small" type="primary" @click="newUserDialog = true">新增用户</el-button>
         </div>
+        <el-table
+                v-loading="loading"
+                ref="userTable"
+                :data="tableData"
+                tooltip-effect="dark"
+                @row-click="rowClick"
+                style="width: 100%"
+                @selection-change="handleSelectionChange">
+            <el-table-column
+                    type="selection"
+                    align="center">
+            </el-table-column>
+            <!--<el-table-column
+                    prop="_id"
+                    label="id"
+                    align="center"
+                    fixed>
+            </el-table-column>-->
+            <el-table-column
+                    prop="username"
+                    label="用户名"
+                    align="center"
+                    fixed>
+            </el-table-column>
+            <el-table-column
+                    prop="name"
+                    label="姓名"
+                    align="center"
+                    fixed>
+            </el-table-column>
+            <el-table-column
+                    prop="role"
+                    label="角色"
+                    align="center">
+            </el-table-column>
+            <el-table-column
+                    prop="email"
+                    label="邮箱"
+                    align="center">
+            </el-table-column>
+            <el-table-column label="操作" align="center" fixed="right">
+                <template slot-scope="scope">
+                    <div class="flex justify-content-center">
+                        <el-button type="primary" @click="editUser(scope.row._id)" size="mini"> 修改</el-button>
+                        <el-button type="danger" @click="deleteUser(scope.row._id, scope.row.name)" size="mini"> 删除</el-button>
+                    </div>
+                </template>
+            </el-table-column>
+        </el-table>
+        <el-pagination class="flex justify-content-center "
+                       @size-change="handleSizeChange"
+                       @current-change="handleCurrentChange"
+                       :page-sizes="[10, 20, 30, 40]"
+                       layout="sizes, prev, pager, next"
+                       background
+                       :page-size="pagination.pageSize"
+                       :current-page="pagination.currentPage"
+                       :total="pagination.total">
+        </el-pagination>
         <el-dialog title="新增用户" :visible.sync="newUserDialog" center width="400px" @close="closeUserForm">
             <el-form :model="newUserForm" label-width="80px" :rules="newUserFormRules" ref="userForm">
                 <el-form-item label="用户名" prop="username">
@@ -39,5 +98,8 @@
 <style scoped lang="scss">
     .el-form-item {
         margin-bottom: 15px;
+    }
+    .el-pagination{
+        margin-top: 15px;
     }
 </style>
