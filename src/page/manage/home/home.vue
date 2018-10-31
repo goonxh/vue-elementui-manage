@@ -1,16 +1,11 @@
 <template>
-    <div class="home-page">
-        <pre>
-            "dependencies": {
-                "axios": "^0.18.0",
-                "element-ui": "^2.4.5",
-                "vue": "^2.5.17",
-                "vue-axios": "^2.1.3",
-                "vue-resource": "^1.5.1",
-                "vue-router": "^2.8.1",
-                "vuex": "^2.5.0"
-            }
-        </pre>
+    <div class="home-page page-container">
+        <h3>frontend: Vue + ElementUI</h3>
+        <h3>server: Express</h3>
+        <!--
+        <br>
+        <p>author: <a href="https://github.com/goonxh">goonxh</a></p>
+        -->
     </div>
 </template>
 

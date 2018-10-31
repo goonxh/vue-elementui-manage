@@ -7,8 +7,10 @@ const manage = r => require.ensure([], ()=> r(require('@/page/manage/manage')), 
 const login = r => require.ensure([], () => r(require('@/page/base/login')), 'login');
 const notFound = r => require.ensure([], () => r(require('@/page/base/404')), 'notFound');
 const home = r => require.ensure([], () => r(require('@/page/manage/home/home')), 'home');
-const user = r => require.ensure([], () => r(require('@/page/manage/system/user/user'), 'user'));
 const system = r => require.ensure([], () => r(require('@/page/manage/system/system'), 'system'));
+const user = r => require.ensure([], () => r(require('@/page/manage/system/user/user'), 'user'));
+const log = r => require.ensure([], () => r(require('@/page/manage/system/log/log'), 'log'));
+
 const router = new Router({
     // mode: 'history',
     routes: [
@@ -47,6 +49,11 @@ const router = new Router({
                             path: 'user',
                             name: 'system-user',
                             component: user,
+                        },
+                        {
+                            path: 'log',
+                            name: 'system-log',
+                            component: log,
                         },
                     ]
                 },

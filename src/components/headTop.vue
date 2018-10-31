@@ -76,6 +76,7 @@
                 this.$router.replace('/login');
                 window.sessionStorage.setItem('isLogin', 'false');
                 window.sessionStorage.removeItem('token');
+                this.axios.post(`${baseUrl}/logout`,{user:this.user.name});
             },
             lockScreen() {
                 this.lockScreenDialogVisible = true;

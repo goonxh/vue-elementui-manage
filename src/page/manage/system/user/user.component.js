@@ -151,5 +151,8 @@ export default {
                 });
             });
         },
+        refreshTable() {
+            this.getUserList();
+        }
     }
 }

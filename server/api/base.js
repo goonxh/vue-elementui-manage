@@ -20,7 +20,7 @@ let token = () => {
 app.use(expressJwt({
     secret: secret
 }).unless({
-    path: ['/login','/']  //除了这些地址，其他的url都需要验证
+    path: ['/login','/','/logout']  //除了这些地址，其他的url都需要验证
 }))
 
 // 拦截器
@@ -107,6 +107,14 @@ app.post('/login',(req,res) =>{
                         user:user,
                         token:token()
                     });
+                    let newLog = new models.log({
+                        user: user.name,
+                        date: new Date().toLocaleString(),
+                        action: '登录',
+                        ip: req.connection.remoteAddress.replace('::ffff:',''),
+                        add: '',
+                    })
+                    newLog.save();
                 } else {
                     res.send('密码错误');
                 }
@@ -115,7 +123,16 @@ app.post('/login',(req,res) =>{
     })
 })
 
-
+app.post('/logout',(req,res)=>{
+    let newLog = new models.log({
+        user: req.body.user,
+        date: new Date().toLocaleString(),
+        action: '退出',
+        ip: req.connection.remoteAddress.replace('::ffff:',''),
+        add: '',
+    })
+    newLog.save();
+})
 
 module.exports = app;
 

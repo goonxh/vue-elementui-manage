@@ -1,7 +1,8 @@
 <template>
-    <div class="fill-contain page-container">
+    <div class="page-container">
         <div>
             <el-button size="small" type="primary" @click="newUserDialog = true">新增用户</el-button>
+            <el-button size="small" @click="refreshTable">刷新列表</el-button>
         </div>
         <el-table
                 v-loading="loading"

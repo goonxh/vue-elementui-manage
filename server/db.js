@@ -17,6 +17,9 @@ db.once('open',() => console.log('Mongo connection successed'));
 
 /************** 定义模式 Schema**************/
 
+/**
+ * user 表
+ */
 const userSchema = mongoose.Schema({
     username: {
         unique: true,
@@ -68,9 +71,22 @@ userSchema.methods.comparePassword = function(candidatePassword, callback) {
         callback(null,isMatch);
     })
 }
+
+/**
+ * log 表
+ */
+const logSchema = mongoose.Schema({
+    action: String,  //动作：登录、退出
+    user: String, //操作用户
+    date: String, //操作时间
+    ip: String,
+    add: String,
+})
+
 /************** 定义模型Model **************/
 const Models = {
     user : mongoose.model('user',userSchema),
+    log : mongoose.model('log',logSchema),
 }
 
 module.exports = Models;
