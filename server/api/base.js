@@ -3,7 +3,7 @@ const express = require('express');
 const app = express();
 const jwt = require('jsonwebtoken');
 const expressJwt = require('express-jwt');
-
+const {formatDateTime} = require('../utils');
 
 // 定义签名
 const secret = 'salt';
@@ -109,7 +109,7 @@ app.post('/login',(req,res) =>{
                     });
                     let newLog = new models.log({
                         user: user.name,
-                        date: new Date().toLocaleString(),
+                        date: formatDateTime(new Date()),
                         action: '登录',
                         ip: req.connection.remoteAddress.replace('::ffff:',''),
                         add: '',
@@ -126,7 +126,7 @@ app.post('/login',(req,res) =>{
 app.post('/logout',(req,res)=>{
     let newLog = new models.log({
         user: req.body.user,
-        date: new Date().toLocaleString(),
+        date: formatDateTime(new Date()),
         action: '退出',
         ip: req.connection.remoteAddress.replace('::ffff:',''),
         add: '',
