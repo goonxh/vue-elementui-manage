@@ -36,9 +36,13 @@ const getAddByIp = ip => {
     if(ip === '127.0.0.1'){
         return '本地';
     } else {
-        requst(`http://ip.taobao.com/service/getIpInfo.php?ip=${ip}`,(err,res,req) =>{
-            if(err) throw err;
-            return `${res.data.country} ${res.data.region} ${res.data.city}`;
+       requst(`http://ip.taobao.com/service/getIpInfo.php?ip=${ip}`,(err,res,req) =>{
+            if(err) return '不明';
+            if(res.statusCode == 502) return '不明';
+            if(res.statusCode == 200) {
+                let reqJson = JSON.parse(req);
+                return `${reqJson.data.country?reqJson.data.country:''} ${reqJson.data.region?reqJson.data.region:''} ${reqJson.data.city?reqJson.data.city:''}`;
+            }
         })
     }
 }
@@ -120,12 +124,13 @@ app.post('/login',(req,res) =>{
                         token:token()
                     });
                     let ip = req.connection.remoteAddress.replace('::ffff:','');
+                    let add = getAddByIp(ip);
                     let newLog = new models.log({
                         user: user.name,
                         date: formatDateTime(new Date()),
                         action: '登录',
                         ip: ip,
-                        add: getAddByIp(ip),
+                        add: add?add:'不明',
                     })
                     newLog.save();
                 } else {
@@ -138,12 +143,13 @@ app.post('/login',(req,res) =>{
 
 app.post('/logout',(req,res)=>{
     let ip = req.connection.remoteAddress.replace('::ffff:','');
+    let add = getAddByIp(ip);
     let newLog = new models.log({
         user: req.body.user,
         date: formatDateTime(new Date()),
         action: '退出',
         ip: ip,
-        add: getAddByIp(ip),
+        add: add?add:'不明',
     })
     newLog.save();
 })
