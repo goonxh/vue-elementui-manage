@@ -4,6 +4,7 @@ const app = express();
 const jwt = require('jsonwebtoken');
 const expressJwt = require('express-jwt');
 const {formatDateTime} = require('../utils');
+const requst = require('request');
 
 // 定义签名
 const secret = 'salt';
@@ -30,6 +31,17 @@ app.use(function (err, req, res, next) {
         res.status(401).send('invalid token...');
     }
 })
+
+const getAddByIp = ip => {
+    if(ip === '127.0.0.1'){
+        return '本地';
+    } else {
+        requst(`http://ip.taobao.com/service/getIpInfo.php?ip=${ip}`,(err,res,req) =>{
+            if(err) throw err;
+            return `${res.data.country} ${res.data.region} ${res.data.city}`;
+        })
+    }
+}
 
 /**
  * 注册 /register
@@ -107,12 +119,13 @@ app.post('/login',(req,res) =>{
                         user:user,
                         token:token()
                     });
+                    let ip = req.connection.remoteAddress.replace('::ffff:','');
                     let newLog = new models.log({
                         user: user.name,
                         date: formatDateTime(new Date()),
                         action: '登录',
-                        ip: req.connection.remoteAddress.replace('::ffff:',''),
-                        add: '',
+                        ip: ip,
+                        add: getAddByIp(ip),
                     })
                     newLog.save();
                 } else {
@@ -124,12 +137,13 @@ app.post('/login',(req,res) =>{
 })
 
 app.post('/logout',(req,res)=>{
+    let ip = req.connection.remoteAddress.replace('::ffff:','');
     let newLog = new models.log({
         user: req.body.user,
         date: formatDateTime(new Date()),
         action: '退出',
-        ip: req.connection.remoteAddress.replace('::ffff:',''),
-        add: '',
+        ip: ip,
+        add: getAddByIp(ip),
     })
     newLog.save();
 })

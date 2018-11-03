@@ -32,6 +32,11 @@
                     label="IP"
                     align="center">
             </el-table-column>
+            <el-table-column
+                    prop="add"
+                    label="地点"
+                    align="center">
+            </el-table-column>
         </el-table>
         <el-pagination class="flex justify-content-center "
                        @size-change="handleSizeChange"
