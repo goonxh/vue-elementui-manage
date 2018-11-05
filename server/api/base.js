@@ -32,20 +32,21 @@ app.use(function (err, req, res, next) {
     }
 })
 
-const getAddByIp = ip => {
+
+const getAddByIp = ip => new Promise((resolve,reject)=>{
     if(ip === '127.0.0.1'){
-        return '本地';
+        resolve('本地');
     } else {
-       requst(`http://ip.taobao.com/service/getIpInfo.php?ip=${ip}`,(err,res,req) =>{
-            if(err) return '不明';
-            if(res.statusCode == 502) return '不明';
+        requst(`http://opendata.baidu.com/api.php?query=${ip}&co=&resource_id=6006&t=1412300361645&ie=utf8&oe=utf8&format=json&tn=baidu`,(err,res,req) =>{
+            if(err) resolve('不明');
+            if(res.statusCode == 502) resolve('不明');
             if(res.statusCode == 200) {
                 let reqJson = JSON.parse(req);
-                return `${reqJson.data.country?reqJson.data.country:''} ${reqJson.data.region?reqJson.data.region:''} ${reqJson.data.city?reqJson.data.city:''}`;
+                resolve(`${reqJson.data[0].location?reqJson.data[0].location:'不明'}`);
             }
         })
     }
-}
+})
 
 /**
  * 注册 /register
@@ -124,15 +125,16 @@ app.post('/login',(req,res) =>{
                         token:token()
                     });
                     let ip = req.connection.remoteAddress.replace('::ffff:','');
-                    let add = getAddByIp(ip);
-                    let newLog = new models.log({
-                        user: user.name,
-                        date: formatDateTime(new Date()),
-                        action: '登录',
-                        ip: ip,
-                        add: add?add:'不明',
+                    getAddByIp(ip).then((res)=>{
+                        let newLog = new models.log({
+                            user: user.name,
+                            date: formatDateTime(new Date()),
+                            action: '登录',
+                            ip: ip,
+                            add: res,
+                        })
+                        newLog.save();
                     })
-                    newLog.save();
                 } else {
                     res.send('密码错误');
                 }
@@ -143,15 +145,16 @@ app.post('/login',(req,res) =>{
 
 app.post('/logout',(req,res)=>{
     let ip = req.connection.remoteAddress.replace('::ffff:','');
-    let add = getAddByIp(ip);
-    let newLog = new models.log({
-        user: req.body.user,
-        date: formatDateTime(new Date()),
-        action: '退出',
-        ip: ip,
-        add: add?add:'不明',
+    getAddByIp(ip).then((res)=> {
+        let newLog = new models.log({
+            user: req.body.user,
+            date: formatDateTime(new Date()),
+            action: '退出',
+            ip: ip,
+            add: res,
+        })
+        newLog.save();
     })
-    newLog.save();
 })
 
 module.exports = app;
