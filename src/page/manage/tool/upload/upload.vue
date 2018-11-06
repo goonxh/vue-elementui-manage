@@ -1,7 +1,7 @@
 <template>
     <div class="page-container">
         <el-upload
-                action="/api/upload"
+                :action="uploadAction"
                 list-type="picture-card"
                 :on-preview="handlePictureCardPreview"
                 :headers="uploadHeader"
@@ -16,12 +16,15 @@
 </template>
 
 <script>
+    import {baseUrl} from "../../../../config/utils";
+
     export default {
         data() {
             return {
                 dialogImageUrl: '',
                 dialogVisible: false,
                 uploadHeader: {'Authorization': `${window.sessionStorage.getItem('token')}`},
+                uploadAction: `${baseUrl}/upload`
             }
         },
         methods: {
