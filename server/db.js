@@ -83,10 +83,20 @@ const logSchema = mongoose.Schema({
     add: String,
 })
 
+/**
+ *  upload 文件地址表
+ */
+const uploadSchema = mongoose.Schema({
+    name: String,  //文件名称
+    path: String, //文件路径
+    date: String, //上传时间
+})
+
 /************** 定义模型Model **************/
 const Models = {
     user : mongoose.model('user',userSchema),
     log : mongoose.model('log',logSchema),
+    upload : mongoose.model('upload',uploadSchema),
 }
 
 module.exports = Models;

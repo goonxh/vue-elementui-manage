@@ -27,7 +27,6 @@ axios.interceptors.response.use(function (response) {
     return response;
 }, function (error) {
     // 对响应错误做点什么
-    console.log(error.response)
     if(error.response.status === 401) {
         Message({
             type: 'error',

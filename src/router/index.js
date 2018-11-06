@@ -10,7 +10,8 @@ const home = r => require.ensure([], () => r(require('@/page/manage/home/home'))
 const system = r => require.ensure([], () => r(require('@/page/manage/system/system'), 'system'));
 const user = r => require.ensure([], () => r(require('@/page/manage/system/user/user'), 'user'));
 const log = r => require.ensure([], () => r(require('@/page/manage/system/log/log'), 'log'));
-
+const tool = r => require.ensure([], () => r(require('@/page/manage/tool/tool'), 'tool'));
+const upload = r => require.ensure([], () => r(require('@/page/manage/tool/upload/upload'), 'upload'));
 const router = new Router({
     // mode: 'history',
     routes: [
@@ -38,6 +39,19 @@ const router = new Router({
                     path: '/home',
                     name: 'home',
                     component: home,
+                },
+                {
+                    path: '/tool',
+                    name: 'tool',
+                    component: tool,
+                    redirect: '/tool/upload',
+                    children: [
+                        {
+                            path: '/tool/upload',
+                            name: 'tool-upload',
+                            component: upload,
+                        },
+                    ]
                 },
                 {
                     path: '/system',
