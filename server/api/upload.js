@@ -23,12 +23,12 @@ app.post('/upload',(req,res)=>{
             if(err) throw err;
             let newFile = new models.upload({
                 name: files.upload_img.name,
-                path: newpath,
+                path: '/upload/'+files.upload_img.name,
                 date: formatDateTime(new Date()),
             })
             newFile.save();
             res.writeHead(200,{"Content-Type":"text/html;charset=UTF8"});
-            res.end('图片上传并改名成功！'+ newpath);
+            res.end('图片上传成功！');
         })
     })
 })
