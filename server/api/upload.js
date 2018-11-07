@@ -15,8 +15,6 @@ app.post('/upload',(req,res)=>{
     form.uploadDir = targetFile;
     form.parse(req, function (err, fields, files) {
         if(err) throw err;
-        /*res.writeHead(200,{"Content-Type":"text/html;charset=UTF8"});
-        res.end('图片上传并改名成功！');*/
         let oldpath = files.upload_img.path;
         let newpath = path.join(path.dirname(oldpath), files.upload_img.name);
         fs.rename(oldpath,newpath,(err)=>{
@@ -31,6 +29,26 @@ app.post('/upload',(req,res)=>{
             res.end('图片上传成功！');
         })
     })
+})
+
+app.get('/uploadPic',(req, res)=>{
+    let page = parseInt(req.query.page), pageSize = parseInt(req.query.pageSize);
+    let query = models.upload.find({});
+    let pagination = {};
+    models.upload.countDocuments({},function (error, data) {
+        if(error) throw error;
+        if(data){
+            pagination.total = data;
+            pagination.pageSize = pageSize;
+            pagination.currentPage = page;
+            query.sort({ date: -1}).skip((page-1)*pageSize).limit(pageSize).exec((error, data) => {
+                if(error) throw error;
+                if(data) {
+                    res.json({data:data,pagination:pagination});
+                }
+            })
+        }
+    });
 })
 
 

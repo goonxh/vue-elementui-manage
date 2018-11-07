@@ -8,6 +8,9 @@ import ElemnetUI from 'element-ui';
 import './style/element-variables.scss';
 import { directive } from 'namedavatar/src/vue';
 import { Message } from 'element-ui';
+import hljs from 'highlight.js'
+import 'highlight.js/styles/googlecode.css' //样式文件
+
 Vue.use(ElemnetUI);
 Vue.use(VueAxios,axios);
 Vue.config.productionTip = false;
@@ -15,6 +18,11 @@ Vue.config.productionTip = false;
 // register as directive
 Vue.directive('avatar',directive);
 
+// 自定义highlightCode方法，将只执行一次的逻辑去掉
+hljs.highlightCode = function () {
+    let blocks = document.querySelectorAll('pre code');
+    [].forEach.call(blocks, hljs.highlightBlock);
+};
 
 // axios请求拦截器
 axios.interceptors.request.use(function (config) {
