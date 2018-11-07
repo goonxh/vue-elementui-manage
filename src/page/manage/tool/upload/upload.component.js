@@ -1,11 +1,10 @@
 import {baseUrl} from "../../../../config/utils";
 import hljs from 'highlight.js';
-// import javascript from 'highlight.js/lib/languages/javascript';
-// import 'highlight.js/styles/github.css'
-// hljs.registerLanguage('javascript', javascript);
+import 'element-ui/lib/theme-chalk/display.css';
 export default {
     data() {
         return {
+            uploadLoading: false,
             dialogImageUrl: '',
             dialogVisible: false,
             uploadHeader: {'Authorization': `${window.sessionStorage.getItem('token')}`},
@@ -69,15 +68,18 @@ export default {
             this.getUploadPic({page:val});
         },
         getUploadPic({page = 1} = {page: 1}) {
-            this.loading = true;
+            this.uploadLoading = true;
             this.axios.get(`${baseUrl}/uploadPic`,{params: {page:page,pageSize:5}}).then((res) => {
                 this.uploadPicList = res.data.data;
                 this.pagination = res.data.pagination;
             }).catch((err)=>{
                 this.$message.error(err)
             }).finally(()=>{
-                this.loading = false;
+                this.uploadLoading = false;
             })
         },
+        picUploadSuccess() {
+            this.getUploadPic();
+        }
     },
 }

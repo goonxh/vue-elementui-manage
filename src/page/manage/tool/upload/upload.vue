@@ -5,6 +5,7 @@
                 list-type="picture-card"
                 :on-preview="handlePictureCardPreview"
                 :headers="uploadHeader"
+                :on-success="picUploadSuccess"
                 name="upload_img"
                 :on-remove="handleRemove">
             <i class="el-icon-plus"></i>
@@ -13,14 +14,14 @@
             <img width="100%" :src="dialogImageUrl" alt="">
         </el-dialog>
         <el-row :gutter="20">
-            <el-col :span="10">
-                <ul class="upload-pic-list">
+            <el-col :span="11">
+                <ul class="upload-pic-list" v-loading="uploadLoading">
                     <li v-for="(img,index) in uploadPicList" class="flex">
                         <a :href="'http://vue.xiehao.xin'+img.path" target="_blank" class="flex justify-content-start">
                             <img :src="'http://vue.xiehao.xin'+img.path" alt="" width="100" height="100">
                         </a>
                         <div class="flex align-items-center justify-content-center column">
-                            <p class="">{{img.name}}</p>
+                            <p class="img-name">{{img.name}}</p>
                         </div>
                     </li>
                 </ul>
@@ -33,7 +34,7 @@
                                :total="pagination.total">
                 </el-pagination>
             </el-col>
-            <el-col :span="14">
+            <el-col :span="13" class="hidden-md-and-down">
                 <el-collapse v-model="activeNames" accordion>
                     <el-collapse-item title="node-formidable" name="node-formidable">
                         <p>A node.js module for parsing form data, especially file uploads.</p>
@@ -88,6 +89,11 @@
             border-radius: 10px;
             img {
                 margin: 5px;
+            }
+            .img-name{
+                width: 250px;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
         }
     }
