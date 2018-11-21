@@ -7,13 +7,10 @@
 本地运行时要打开node接口
 
     cd server
-
     node index.js
-
     npm run build //打包成静态文件
 
 登录账户密码：
 
 username : admin
-
 password : 123456
