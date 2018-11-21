@@ -10,7 +10,6 @@
     node index.js
     npm run build //打包成静态文件
 
-登录账户密码：
+登录账户/密码：
 
-username : admin
-password : 123456
+admin/123456
