@@ -9,15 +9,17 @@ const bodyParser = require('body-parser')
 // 引入Express
 const express = require('express');
 const app = express();
-var cors = require('cors');
+const cors = require('cors');
+
 app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(api);
+
 app.use(function(err, req, res, next) {
     console.error(err.stack);
     res.status(500).send('Something broke!');
 });
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
-app.use(api);
 
 // 访问静态资源文件 这里是访问所有dist目录下的静态资源文件
 // app.use(express.static(path.resolve(__dirname, '../dist')))
@@ -26,6 +28,7 @@ app.use(api);
 //    const html = fs.readFileSync(path.resolve(__dirname, '../dist/index.html'), 'utf-8');
 //    res.send(html)
 // })
+
 
 // 监听8787端口
 app.listen(8787);

@@ -20,7 +20,6 @@
                     <span>工具介绍</span>
                 </template>
                 <el-menu-item index="/tool/upload">图片上传</el-menu-item>
-                <!--<el-menu-item index="/system/log">操作日志</el-menu-item>-->
             </el-submenu>
             <el-submenu index="/system">
                 <template slot="title">
