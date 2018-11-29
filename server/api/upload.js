@@ -9,7 +9,7 @@ const fs = require('fs');
 const path = require('path');
 
 
-app.post('/upload',(req,res)=>{
+app.post('/api/upload',(req,res)=>{
     let form = new formidable.IncomingForm();
     let targetFile = path.join(__dirname, '../upload');
     form.uploadDir = targetFile;
@@ -31,7 +31,7 @@ app.post('/upload',(req,res)=>{
     })
 })
 
-app.get('/uploadPic',(req, res)=>{
+app.get('/api/uploadPic',(req, res)=>{
     let page = parseInt(req.query.page), pageSize = parseInt(req.query.pageSize);
     let query = models.upload.find({});
     let pagination = {};

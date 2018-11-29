@@ -5,7 +5,7 @@ const app = express();
 /**
  * 获取log列表
  */
-app.get('/log',function (req, res) {
+app.get('/api/log',function (req, res) {
     let page = parseInt(req.query.page), pageSize = parseInt(req.query.pageSize);
     let query = models.log.find({});
     let pagination = {};

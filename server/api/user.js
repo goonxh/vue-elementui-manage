@@ -5,7 +5,7 @@ const app = express();
 /**
  * 根据用户id获取用户信息 /userInfo
  */
-app.post('/userInfo',(req,res) =>{
+app.post('/api/userInfo',(req,res) =>{
     models.user.findOne({_id: req.body.id}, (error, user) =>{
         if(error) throw error;
         if(!user) {
@@ -25,7 +25,7 @@ app.post('/userInfo',(req,res) =>{
 /**
  * 获取用户列表
  */
-app.get('/user',function (req, res) {
+app.get('/api/user',function (req, res) {
     let page = parseInt(req.query.page), pageSize = parseInt(req.query.pageSize);
     let query = models.user.find({});
     let pagination = {};
@@ -48,7 +48,7 @@ app.get('/user',function (req, res) {
 /**
  * 根据id删除用户
  */
-app.delete('/user/:id',function (req, res) {
+app.delete('/api/user/:id',function (req, res) {
    models.user.deleteOne({_id: req.params.id}, function (error) {
        if(error) throw error;
        res.send('1');

@@ -21,7 +21,7 @@ let token = () => {
 app.use(expressJwt({
     secret: secret
 }).unless({
-    path: ['/login','/','/logout']  //除了这些地址，其他的url都需要验证
+    path: ['/api/login','/','/api/logout']  //除了这些地址，其他的url都需要验证
 }))
 
 // 拦截器
@@ -51,7 +51,7 @@ const getAddByIp = ip => new Promise((resolve,reject)=>{
 /**
  * 注册 /register
  */
-app.post('/register',(req,res) => {
+app.post('/api/register',(req,res) => {
     let newUser = new models.user({
         username: req.body.username,
         name: req.body.name?req.body.name:null,
@@ -78,7 +78,7 @@ app.post('/register',(req,res) => {
 /**
  * 修改密码等用户个人信息
  */
-app.patch('/user', (req,res)=>{
+app.patch('/api/user', (req,res)=>{
     let id = req.body.id;
     let oldPassword = req.body.oldPassword;
     models.user.findOne({_id: id}, (error, user) =>{
@@ -110,7 +110,7 @@ app.patch('/user', (req,res)=>{
 /**
  * 登录 密码验证  /login
  */
-app.post('/login',(req,res) =>{
+app.post('/api/login',(req,res) =>{
     models.user.findOne({username: req.body.username}, (error, user) =>{
         if(error) throw error;
         if(!user) {
@@ -143,7 +143,7 @@ app.post('/login',(req,res) =>{
     })
 })
 
-app.post('/logout',(req,res)=>{
+app.post('/api/logout',(req,res)=>{
     let ip = req.connection.remoteAddress.replace('::ffff:','');
     getAddByIp(ip).then((res)=> {
         let newLog = new models.log({

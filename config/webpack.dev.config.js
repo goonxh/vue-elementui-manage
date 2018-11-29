@@ -37,7 +37,7 @@ module.exports = function() {
             proxy: {
                 '/api' :{
                     target: 'http://localhost:8787',
-                    pathRewrite: {"^/api" : ""},
+                    // pathRewrite: {"^/api" : ""},
                     secure: false,
                     changeOrigin: true,
                 }
