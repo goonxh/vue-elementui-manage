@@ -124,7 +124,7 @@ app.post('/api/login',(req,res) =>{
                         user:user,
                         token:token()
                     });
-                    let ip = req.connection.remoteAddress.replace('::ffff:','');
+                    let ip = req.connection.remoteAddress.replace('::ffff:','') === '127.0.0.1'?'127.0.0.1':req.getHeader('X-real-ip');
                     getAddByIp(ip).then((res)=>{
                         let newLog = new models.log({
                             user: user.name,
@@ -144,7 +144,7 @@ app.post('/api/login',(req,res) =>{
 })
 
 app.post('/api/logout',(req,res)=>{
-    let ip = req.connection.remoteAddress.replace('::ffff:','');
+    let ip = req.connection.remoteAddress.replace('::ffff:','') === '127.0.0.1'?'127.0.0.1':req.getHeader('X-real-ip');
     getAddByIp(ip).then((res)=> {
         let newLog = new models.log({
             user: req.body.user,
