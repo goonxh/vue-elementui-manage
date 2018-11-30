@@ -17,7 +17,7 @@
             <el-col :span="11">
                 <ul class="upload-pic-list" v-loading="uploadLoading">
                     <li v-for="(img,index) in uploadPicList" class="flex">
-                        <a :href="'http://vue.xiehao.xin'+img.path" target="_blank" class="flex justify-content-start">
+                        <a :href="img.path" target="_blank" class="flex justify-content-start">
                             <img :src="img.path" alt="" width="100" height="100">
                         </a>
                         <div class="flex align-items-center justify-content-center column">
