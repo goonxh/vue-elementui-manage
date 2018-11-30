@@ -11,7 +11,7 @@ const path = require('path');
 
 app.post('/api/upload',(req,res)=>{
     let form = new formidable.IncomingForm();
-    let targetFile = path.join(__dirname, '../upload');
+    let targetFile = path.join(__dirname, '../../upload');
     form.uploadDir = targetFile;
     form.parse(req, function (err, fields, files) {
         if(err) throw err;
