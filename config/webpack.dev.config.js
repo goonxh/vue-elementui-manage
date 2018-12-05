@@ -5,7 +5,7 @@ const ROOT = path.resolve(__dirname, '..');
 const root = path.join.bind(path, ROOT);
 
 const METADATA = webpackMerge(baseWebpackConfig().metadata,{
-    host: 'localhost',
+    host: '0.0.0.0',
     port: 3003
 })
 process.env.NODE_ENV = process.env.NODE_ENV ? process.env.NODE_ENV : 'development';
