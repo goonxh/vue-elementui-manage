@@ -2,7 +2,7 @@
     <div class="login-page fill-contain flex justify-content-center">
         <div class="loginBox">
             <h3 class="system-name text-center">Vue+elementUI后台管理模板</h3>
-            <el-form label-position="left" label-width="65px" :model="loginForm" ref="loginForm" :rules="loginRules" >
+            <el-form label-position="left" label-width="70px" :model="loginForm" ref="loginForm" :rules="loginRules" >
                 <el-form-item label="用户名" prop="username" >
                     <el-input v-model="loginForm.username"></el-input>
                 </el-form-item>
@@ -41,7 +41,7 @@
             login(formName) {
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
-                        this.axios.post(`${baseUrl}/login`,this.loginForm).then((res) =>{
+                        this.axios.post(`${baseUrl}/login`,this.loginForm).then((res) => {
                             if(res.data.success === 1) {
                                 this.$store.commit('setUser', res.data.user);
                                 window.sessionStorage.setItem('isLogin','true');
