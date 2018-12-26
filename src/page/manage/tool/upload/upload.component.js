@@ -1,6 +1,7 @@
 import {baseUrl} from "../../../../config/utils";
 import hljs from 'highlight.js';
 import 'element-ui/lib/theme-chalk/display.css';
+
 export default {
     data() {
         return {

@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import store from '../store/';
 Vue.use(Router);
 
 const manage = r => require.ensure([], ()=> r(require('@/page/manage/manage')), 'manage');
@@ -12,6 +11,8 @@ const user = r => require.ensure([], () => r(require('@/page/manage/system/user/
 const log = r => require.ensure([], () => r(require('@/page/manage/system/log/log'), 'log'));
 const tool = r => require.ensure([], () => r(require('@/page/manage/tool/tool'), 'tool'));
 const upload = r => require.ensure([], () => r(require('@/page/manage/tool/upload/upload'), 'upload'));
+const markdown2html = r => require.ensure([],() => r(require('@/page/manage/tool/markdown2html/markdown2html.vue'),'markdown2html'));
+
 const router = new Router({
     // mode: 'history',
     routes: [
@@ -50,6 +51,11 @@ const router = new Router({
                             path: '/tool/upload',
                             name: 'tool-upload',
                             component: upload,
+                        },
+                        {
+                            path: '/tool/markdown2html',
+                            name: 'tool-markdown2html',
+                            component: markdown2html,
                         },
                     ]
                 },
