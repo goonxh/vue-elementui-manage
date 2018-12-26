@@ -47,15 +47,6 @@ const getAddByIp = ip => new Promise((resolve,reject)=>{
         })
     }
 })
-let newUser = new models.user({
-    username: 'admin',
-    name: 'admin',
-    password: '123456',
-    role: '管理员',
-    email: 'email',
-})
-newUser.save()
-
 /**
  * 注册 /register
  */
