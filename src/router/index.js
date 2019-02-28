@@ -12,6 +12,7 @@ const log = r => require.ensure([], () => r(require('@/page/manage/system/log/lo
 const tool = r => require.ensure([], () => r(require('@/page/manage/tool/tool'), 'tool'));
 const upload = r => require.ensure([], () => r(require('@/page/manage/tool/upload/upload'), 'upload'));
 const markdown2html = r => require.ensure([],() => r(require('@/page/manage/tool/markdown2html/markdown2html.vue'),'markdown2html'));
+const videoInCanvas = r => require.ensure([],() => r(require('@/page/manage/tool/videoInCanvas/videoInCanvas.vue'),'videoInCanvas'));
 
 const router = new Router({
     // mode: 'history',
@@ -56,6 +57,11 @@ const router = new Router({
                             path: '/tool/markdown2html',
                             name: 'tool-markdown2html',
                             component: markdown2html,
+                        },
+                        {
+                            path: '/tool/videoInCanvas',
+                            name: 'tool-videoInCanvas',
+                            component: videoInCanvas,
                         },
                     ]
                 },
