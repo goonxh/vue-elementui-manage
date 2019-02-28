@@ -12,24 +12,25 @@
                 router>
             <el-menu-item index="/home">
                 <i class="iconfont icon-home"></i>
-                <span slot="title">首页</span>
+                <span slot="title">home</span>
             </el-menu-item>
             <el-submenu index="/tool">
                 <template slot="title">
                     <i class="iconfont icon-wrench"></i>
-                    <span>工具介绍</span>
+                    <span>tools</span>
                 </template>
-                <el-menu-item index="/tool/upload">图片上传</el-menu-item>
+                <el-menu-item index="/tool/upload">imageUpload</el-menu-item>
                 <el-menu-item index="/tool/markdown2html">markdown2html</el-menu-item>
                 <el-menu-item index="/tool/videoInCanvas">videoInCanvas</el-menu-item>
+                <el-menu-item index="/tool/drag">easyDrag</el-menu-item>
             </el-submenu>
             <el-submenu index="/system">
                 <template slot="title">
                     <i class="iconfont icon-setting"></i>
-                    <span>系统管理</span>
+                    <span>system</span>
                 </template>
-                    <el-menu-item index="/system/user">用户管理</el-menu-item>
-                    <el-menu-item index="/system/log">操作日志</el-menu-item>
+                    <el-menu-item index="/system/user">user</el-menu-item>
+                    <el-menu-item index="/system/log">log</el-menu-item>
             </el-submenu>
         </el-menu>
     </div>

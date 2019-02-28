@@ -8,11 +8,13 @@ import ElemnetUI from 'element-ui';
 import './style/element-variables.scss';
 import { directive } from 'namedavatar/src/vue';
 import { Message } from 'element-ui';
-import hljs from 'highlight.js'
-import 'highlight.js/styles/googlecode.css' //样式文件
+import hljs from 'highlight.js';
+import 'highlight.js/styles/googlecode.css'; //样式文件
+import vueEasyDrag from 'vue-easy-drag';
 
 Vue.use(ElemnetUI);
 Vue.use(VueAxios,axios);
+Vue.component('vue-easy-drag', vueEasyDrag);
 Vue.config.productionTip = false;
 
 // register as directive

@@ -2,7 +2,7 @@
     <div class="head-top">
         <el-row type="flex" justify="space-between">
             <div class="flex align-items-center head-left">
-                <p>Vue+elementUI后台管理模板</p>
+                <p>Vue+elementUI+express</p>
                 <i class="iconfont icon-menu menu-icon"  @click="changeMenuStatus"></i>
             </div>
             <div class="flex align-items-center head-right">
