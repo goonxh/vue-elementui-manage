@@ -14,6 +14,7 @@ const upload = r => require.ensure([], () => r(require('@/page/manage/tool/uploa
 const markdown2html = r => require.ensure([],() => r(require('@/page/manage/tool/markdown2html/markdown2html.vue'),'markdown2html'));
 const videoInCanvas = r => require.ensure([],() => r(require('@/page/manage/tool/videoInCanvas/videoInCanvas.vue'),'videoInCanvas'));
 const easyDrag = r => require.ensure([],() => r(require('@/page/manage/tool/easyDrag/easyDrag.vue'), 'easyDrag'));
+const record = r => require.ensure([], ()=> r(require('@/page/manage/tool/record/record.vue'), 'record'));
 
 const router = new Router({
     // mode: 'history',
@@ -68,6 +69,11 @@ const router = new Router({
                             path: '/tool/drag',
                             name: 'tool-drag',
                             component: easyDrag,
+                        },
+                        {
+                            path: '/tool/record',
+                            name: 'tool-record',
+                            component: record,
                         },
                     ]
                 },
