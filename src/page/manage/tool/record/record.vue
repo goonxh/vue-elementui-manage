@@ -9,7 +9,7 @@
 </template>
 
 <script>
-    import RecordRTC from 'recordrtc'
+    import RecordRTC from 'recordrtc';
     export default {
         data() {
             return {

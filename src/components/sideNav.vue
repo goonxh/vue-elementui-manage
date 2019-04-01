@@ -24,6 +24,7 @@
                 <el-menu-item index="/tool/videoInCanvas">videoInCanvas</el-menu-item>
                 <el-menu-item index="/tool/drag">easyDrag</el-menu-item>
                 <el-menu-item index="/tool/record">record</el-menu-item>
+                <el-menu-item index="/tool/screenRecord">screenRecord</el-menu-item>
             </el-submenu>
             <el-submenu index="/system">
                 <template slot="title">

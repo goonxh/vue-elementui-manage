@@ -15,7 +15,7 @@ const markdown2html = r => require.ensure([],() => r(require('@/page/manage/tool
 const videoInCanvas = r => require.ensure([],() => r(require('@/page/manage/tool/videoInCanvas/videoInCanvas.vue'),'videoInCanvas'));
 const easyDrag = r => require.ensure([],() => r(require('@/page/manage/tool/easyDrag/easyDrag.vue'), 'easyDrag'));
 const record = r => require.ensure([], ()=> r(require('@/page/manage/tool/record/record.vue'), 'record'));
-
+const screenRecord = r => require.ensure([], ()=> r(require('@/page/manage/tool/screenRecord/screenRecord.vue'), 'screenRecord'));
 const router = new Router({
     // mode: 'history',
     routes: [
@@ -74,6 +74,11 @@ const router = new Router({
                             path: '/tool/record',
                             name: 'tool-record',
                             component: record,
+                        },
+                        {
+                            path: '/tool/screenRecord',
+                            name: 'tool-screenRecord',
+                            component: screenRecord,
                         },
                     ]
                 },
