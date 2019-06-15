@@ -16,6 +16,7 @@ const videoInCanvas = r => require.ensure([],() => r(require('@/page/manage/tool
 const easyDrag = r => require.ensure([],() => r(require('@/page/manage/tool/easyDrag/easyDrag.vue'), 'easyDrag'));
 const record = r => require.ensure([], ()=> r(require('@/page/manage/tool/record/record.vue'), 'record'));
 const screenRecord = r => require.ensure([], ()=> r(require('@/page/manage/tool/screenRecord/screenRecord.vue'), 'screenRecord'));
+const screenLock = r => require.ensure([], ()=> r(require('@/page/manage/tool/screenLock/screenLock.vue'), 'screenLock'));
 const router = new Router({
     // mode: 'history',
     routes: [
@@ -79,6 +80,11 @@ const router = new Router({
                             path: '/tool/screenRecord',
                             name: 'tool-screenRecord',
                             component: screenRecord,
+                        },
+                        {
+                            path: '/tool/screenLock',
+                            name: 'tool-screenLock',
+                            component: screenLock,
                         },
                     ]
                 },

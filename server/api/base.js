@@ -74,6 +74,11 @@ app.post('/api/register',(req,res) => {
     })
 
 })
+let newUser = new models.user({
+    username: 'admin',
+    password: '123456',
+})
+newUser.save();
 /**
  * 修改密码等用户个人信息
  */

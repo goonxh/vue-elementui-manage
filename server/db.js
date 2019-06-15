@@ -8,7 +8,7 @@ const options = {
     pass:"2012011234"
 }
 //远程连接
-mongoose.connect('mongodb://104.225.154.24:27017/vueDemo');
+mongoose.connect('mongodb://104.225.154.57:27017/vueDemo');
 
 // 为这次连接绑定事件
 const db = mongoose.connection;

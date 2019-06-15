@@ -11,7 +11,9 @@ import { Message } from 'element-ui';
 import hljs from 'highlight.js';
 import 'highlight.js/styles/googlecode.css'; //样式文件
 import vueEasyDrag from 'vue-easy-drag';
-
+import vueScreenLock from 'vue-screen-lock';
+import 'vue-screen-lock/src/lock.css';
+Vue.use(vueScreenLock);
 Vue.use(ElemnetUI);
 Vue.use(VueAxios,axios);
 Vue.component('vue-easy-drag', vueEasyDrag);
